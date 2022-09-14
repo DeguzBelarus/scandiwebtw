@@ -1,4 +1,4 @@
-# Client React app for Scandiweb
+# React application (client) for Scandiweb
 
 Endpoint for this client: [here](https://github.com/scandiweb/junior-react-endpoint)
 
