@@ -1,0 +1,67 @@
+@import "../../variables";
+
+header {
+  width: 100%;
+  height: $header-height + px;
+  padding-left: 101px;
+  padding-right: 101px;
+  @include flex-line-spacebetween-vertical-center;
+
+  .cart-currency-container {
+    width: $currency-cart-container-width + 14 + px;
+    height: 100%;
+    @include flex-line-start-vertical-center;
+    @include user-select-none;
+    position: relative;
+
+    .currency-switch-container {
+      width: 100%;
+      margin-right: 22px;
+      cursor: pointer;
+
+      .currency-type-indicator {
+        margin-right: 10px;
+        font-family: "Raleway";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+        color: #1d1f22;
+      }
+
+      .currency-switcher {
+        transition-property: transform;
+        transition-duration: 0.4s;
+        transition-timing-function: linear;
+
+        &.active {
+          transform: rotateX(180deg);
+        }
+      }
+    }
+
+    .cart-icon-wrapper {
+      position: relative;
+      cursor: pointer;
+
+      .products-count-indicator {
+        width: 25px;
+        height: 25px;
+        @include flex-all-center;
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        border-radius: 50%;
+        background-color: #000;
+
+        span {
+          margin-top: -2px;
+          line-height: 100%;
+          font-family: "Raleway";
+          font-weight: 400;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

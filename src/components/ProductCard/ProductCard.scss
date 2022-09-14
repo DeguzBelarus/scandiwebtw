@@ -1,0 +1,101 @@
+@import "../../variables";
+
+.product-card-wrapper {
+  width: $product-card-width + px;
+  height: $product-card-height + px;
+  @include flex-column-line-center-vertical-top;
+  @include user-select-none;
+  padding: 16px;
+  padding-bottom: 0;
+
+  &.out-of-stock {
+    opacity: 0.5;
+  }
+
+  .poster-wrapper {
+    width: 356px;
+    height: 338px;
+    @include flex-all-center;
+    position: relative;
+    margin-bottom: 21px;
+    overflow-x: hidden;
+
+    .product-poster {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: auto;
+      max-height: 338px;
+    }
+
+    .out-of-stock-title {
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 160%;
+      color: #8d8f9a;
+      z-index: 1;
+    }
+  }
+
+  .product-title-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  .product-title {
+    width: 100%;
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 160%;
+    color: #1d1f22;
+  }
+
+  .product-details-button {
+    width: 52px;
+    height: 52px;
+    position: absolute;
+    top: -50px;
+    right: 26px;
+    @include flex-all-center;
+    @include user-select-none;
+    border-radius: 50%;
+    background-color: #5ece7b;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 5;
+    animation-name: appearing;
+    animation-timing-function: linear;
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+
+    img {
+      width: 24px;
+      height: 24px;
+      display: inline;
+    }
+  }
+
+  .product-price {
+    width: 100%;
+
+    span {
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 160%;
+      color: #1d1f22;
+    }
+  }
+}
+
+@keyframes appearing {
+  100% {
+    opacity: 1;
+  }
+}

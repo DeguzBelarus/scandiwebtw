@@ -1,0 +1,53 @@
+@import "../../variables";
+
+.categories-container {
+  height: 100%;
+  @include flex-all-center;
+
+  .category-selector {
+    height: 100%;
+    @include flex-all-center;
+    @include user-select-none;
+    margin-right: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #1d1f22;
+    border-bottom: 2px solid transparent;
+    transition-property: border-color, color;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+    cursor: pointer;
+
+    &.active {
+      font-weight: 600;
+      color: #5ece7b;
+      border-bottom: 2px solid #5ece7b;
+    }
+
+    &:nth-of-type(1) {
+      width: 52.42px;
+    }
+
+    &:nth-of-type(2) {
+      width: 90.08px;
+    }
+
+    &:nth-of-type(3) {
+      width: 68.2px;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .category-selector {
+    &:hover {
+      color: #5ece7b;
+      border-bottom: 2px solid rgba($color: #5ece7b, $alpha: 0.5);
+    }
+  }
+}

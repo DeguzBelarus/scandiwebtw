@@ -1,0 +1,85 @@
+@import "../../variables";
+
+.cart-page-wrapper {
+  width: 100%;
+  height: calc(100vh - #{($header-height + px)});
+  @include flex-column-line-start-vertical-top;
+  @include user-select-none;
+  padding: 0 100px 10px;
+  overflow-y: scroll;
+
+  .category-name-container {
+    width: 100%;
+    min-height: 175px;
+    padding-top: 80px;
+    @include flex-column-line-start-vertical-top;
+    @include user-select-none;
+
+    span {
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+      color: #1d1f22;
+    }
+  }
+
+  .cart-data {
+    width: 100%;
+    @include flex-column-line-start-vertical-top;
+    @include user-select-none;
+    margin-bottom: 24px;
+
+    p {
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
+      color: yellowgreen;
+    }
+  }
+
+  .total-information-container {
+    height: auto;
+    @include flex-line-start-vertical-top;
+    @include user-select-none;
+    margin-bottom: 8px;
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    color: #1d1f22;
+
+    &:first-of-type {
+      margin-top: 32px;
+    }
+
+    &.total {
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+
+    span {
+      min-width: 104px;
+    }
+  }
+
+  .order-button {
+    width: 279px;
+    min-height: 43px;
+    @include flex-all-center;
+    @include user-select-none;
+    margin-top: 16px;
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 120%;
+    background-color: #5ece7b;
+    color: #ffffff;
+    cursor: pointer;
+  }
+}

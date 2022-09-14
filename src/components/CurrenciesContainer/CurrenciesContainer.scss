@@ -1,0 +1,60 @@
+@import "../../variables";
+
+.currencies-container {
+  width: $currencies-container-width + px;
+  height: 0;
+  position: absolute;
+  top: $header-height - 5 + px;
+  left: -30px;
+  @include flex-column-line-center-vertical-top;
+  @include user-select-none;
+  background-color: #fff;
+  animation-name: manifestation;
+  animation-fill-mode: forwards;
+  animation-duration: 0.15s;
+  animation-timing-function: linear;
+  overflow: hidden;
+  z-index: 1;
+
+  .currency-selection-container {
+    width: 100%;
+    height: 45px;
+    @include flex-all-center;
+    cursor: pointer;
+
+    &:nth-of-type(odd) {
+      background-color: #fff;
+    }
+
+    &:nth-of-type(even) {
+      background-color: #eee;
+    }
+
+    span {
+      font-family: "Raleway";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 160%;
+      color: #1d1f22;
+    }
+  }
+}
+
+@keyframes manifestation {
+  100% {
+    height: $currencies-container-height + px;
+  }
+}
+
+@media (hover: hover) {
+  .currencies-container {
+    .currency-selection-container {
+      &:hover {
+        span {
+          color: yellowgreen;
+        }
+      }
+    }
+  }
+}

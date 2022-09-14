@@ -1,0 +1,33 @@
+@import "../../variables";
+
+.product-poster-loader {
+  width: 100px;
+  height: 100px;
+  @include flex-all-center;
+  @include user-select-none;
+  border-radius: 50%;
+  border: 4px solid yellowgreen;
+  animation-name: rotation;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 0.7s;
+
+  span {
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 160%;
+    color: yellowgreen;
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
