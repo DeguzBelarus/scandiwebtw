@@ -21,7 +21,9 @@ type Props = {
 }
 
 type State = {
-   cartDataModified: InCartProductObjectModified[]
+   cartDataModified: InCartProductObjectModified[],
+   cartTotalAmount: number,
+   cartTaxAmount: number
 }
 
 class CartPage extends Component<Props, State> {
@@ -29,7 +31,9 @@ class CartPage extends Component<Props, State> {
       super(props)
 
       this.state = {
-         cartDataModified: []
+         cartDataModified: [],
+         cartTotalAmount: 0,
+         cartTaxAmount: 0
       }
    }
 
@@ -46,6 +50,20 @@ class CartPage extends Component<Props, State> {
       }
 
       if (this.props.cart.length) {
+         const cartTotal = this.props.cart.reduce((sum, product: InCartProductObject) => {
+            const productPrice = product.inCartProductData.prices.find((price: any) => {
+               return price.currency.label === this.props.currentCurrency.label
+            })
+            return Number(((sum += productPrice?.amount || 0)))
+         }, 0)
+
+         if (cartTotal) {
+            this.setState({
+               cartTotalAmount: cartTotal,
+               cartTaxAmount: cartTotal * 0.21
+            })
+         }
+
          const modifiedCart = this.props.cart
             .map((product: InCartProductObject, index, array) => {
                const productId: number = product.id
@@ -69,9 +87,23 @@ class CartPage extends Component<Props, State> {
    }
 
    componentDidUpdate(prevProps: Readonly<Props>): void {
-      window.localStorage.setItem("cart-data", JSON.stringify([...this.props.cart]))
-
       if (prevProps.cart.length !== this.props.cart.length) {
+         window.localStorage.setItem("cart-data", JSON.stringify([...this.props.cart]))
+
+         const cartTotal = this.props.cart.reduce((sum, product: InCartProductObject) => {
+            const productPrice = product.inCartProductData.prices.find((price: any) => {
+               return price.currency.label === this.props.currentCurrency.label
+            })
+            return Number(((sum += productPrice?.amount || 0)))
+         }, 0)
+
+         if (cartTotal) {
+            this.setState({
+               cartTotalAmount: cartTotal,
+               cartTaxAmount: cartTotal * 0.21
+            })
+         }
+
          const sortCartProductsMethod = (previous: any, next: any) => {
             switch (true) {
                case previous.id > next.id:
@@ -125,12 +157,7 @@ class CartPage extends Component<Props, State> {
                   <div className="total-information-container">
                      <span>Tax 21%:</span>
                      <strong>
-                        {`${this.props.currentCurrency.symbol}${this.props.cart.reduce((sum, product: InCartProductObject) => {
-                           const productPrice = product.inCartProductData.prices.find((price: any) => {
-                              return price.currency.label === this.props.currentCurrency.label
-                           })
-                           return Number(((sum += productPrice?.amount || 0) * 0.21).toFixed(2))
-                        }, 0)}`}
+                        {`${this.props.currentCurrency.symbol}${this.state.cartTaxAmount.toFixed(2)}`}
                      </strong>
                   </div>
                   <div className="total-information-container">
@@ -142,18 +169,12 @@ class CartPage extends Component<Props, State> {
                   <div className="total-information-container total">
                      <span>Total:</span>
                      <strong>
-                        {`${this.props.currentCurrency.symbol}${this.props.cart.reduce((sum, product: InCartProductObject) => {
-                           const productPrice = product.inCartProductData.prices.find((price: any) => {
-                              return price.currency.label === this.props.currentCurrency.label
-                           })
-                           return Number(((sum += productPrice?.amount || 0)).toFixed(2))
-                        }, 0)}`}
+                        {`${this.props.currentCurrency.symbol}${this.state.cartTotalAmount.toFixed(2)}`}
                      </strong>
                   </div>
 
                   <OrderButton cartDataModified={this.state.cartDataModified} />
                </>}
-
          </div>
       )
    }
