@@ -87,6 +87,22 @@ class CartPage extends Component<Props, State> {
    }
 
    componentDidUpdate(prevProps: Readonly<Props>): void {
+      if (prevProps.currentCurrency.symbol !== this.props.currentCurrency.symbol) {
+         const cartTotal = this.props.cart.reduce((sum, product: InCartProductObject) => {
+            const productPrice = product.inCartProductData.prices.find((price: any) => {
+               return price.currency.label === this.props.currentCurrency.label
+            })
+            return Number(((sum += productPrice?.amount || 0)))
+         }, 0)
+
+         if (cartTotal) {
+            this.setState({
+               cartTotalAmount: cartTotal,
+               cartTaxAmount: cartTotal * 0.21
+            })
+         }
+      }
+
       if (prevProps.cart.length !== this.props.cart.length) {
          window.localStorage.setItem("cart-data", JSON.stringify([...this.props.cart]))
 
