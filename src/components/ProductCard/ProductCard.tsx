@@ -83,9 +83,7 @@ class ProductCard extends Component<Props, State> {
             </div>
             <p className="product-price">
                <span>
-                  {this.props.productData.prices.find((price: any) => {
-                     return price.currency.label === this.props.currentCurrency.label
-                  }).currency.symbol}
+                  {this.props.currentCurrency.symbol}
                </span>
                <span>
                   {this.props.productData.prices.find((price: any) => {
