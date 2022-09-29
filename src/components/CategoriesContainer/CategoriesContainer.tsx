@@ -27,8 +27,23 @@ class CategoriesContainer extends Component<Props> {
       this.props.getProductsAsync({ query: GET_PRODUCTS, variables: { title: "all" } })
    }
 
-   componentDidUpdate(): void {
+   componentDidUpdate(prevProps: Readonly<Props>): void {
       this.props.getProductsAsync({ query: GET_PRODUCTS, inputVariables: { title: this.props.currentCategory } })
+
+      if (prevProps.currentCategory !== this.props.currentCategory) {
+         if (!window.location.pathname.includes("/product")) {
+            switch (true) {
+               case this.props.currentCategory === "all":
+                  window.history.replaceState(null, "New Page Title", "/all")
+                  break
+               case this.props.currentCategory === "clothes":
+                  window.history.replaceState(null, "New Page Title", "/clothes")
+                  break
+               case this.props.currentCategory === "tech":
+                  window.history.replaceState(null, "New Page Title", "/tech")
+            }
+         }
+      }
    }
 
    render() {

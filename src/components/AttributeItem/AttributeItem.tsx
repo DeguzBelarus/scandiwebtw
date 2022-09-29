@@ -6,7 +6,8 @@ import AttributePropertyItem, { SelectedPropertyObject } from "./AttributeProper
 type Props = {
    attributeData: AttributeObject,
    inCartMode: boolean,
-   inCartProductSelectedAttributes: SelectedPropertyObject[]
+   inCartProductSelectedAttributes: SelectedPropertyObject[],
+   cartItemId: number
 }
 
 class AttributeItem extends Component<Props> {
@@ -22,6 +23,7 @@ class AttributeItem extends Component<Props> {
                         inCartMode={this.props.inCartMode}
                         inCartProductSelectedAttributes={this.props.inCartProductSelectedAttributes}
                         propertyData={attributeItem}
+                        cartItemId={this.props.cartItemId}
                         key={attributeItem.id} />
                   })}
                </div>
@@ -32,6 +34,7 @@ class AttributeItem extends Component<Props> {
                         inCartMode={this.props.inCartMode}
                         inCartProductSelectedAttributes={this.props.inCartProductSelectedAttributes}
                         propertyData={attributeItem}
+                        cartItemId={this.props.cartItemId}
                         key={attributeItem.id} />
                   })}
                </div>}

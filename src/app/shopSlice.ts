@@ -9,11 +9,13 @@ export interface CurrencyObject {
    symbol: string
 }
 
+
 export interface AttributeItemObject {
    id: string,
    value: string,
    displayValue: string
 }
+
 
 export interface AttributeObject {
    id: string,
@@ -44,7 +46,7 @@ export interface ProductObject {
 export interface InCartProductObject {
    id: number,
    inCartProductData: ProductObject,
-   selectedAttributes: SelectedPropertyObject
+   selectedAttributes: SelectedPropertyObject[]
 }
 
 interface ShopState {
@@ -67,7 +69,7 @@ const initialState = {
    products: [],
    currentProduct: {
       id: "",
-      name: "string",
+      name: "",
       inStock: false,
       gallery: [],
       description: "",

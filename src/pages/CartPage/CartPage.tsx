@@ -103,9 +103,7 @@ class CartPage extends Component<Props, State> {
          }
       }
 
-      if (prevProps.cart.length !== this.props.cart.length) {
-         window.localStorage.setItem("cart-data", JSON.stringify([...this.props.cart]))
-
+      if (JSON.stringify(prevProps.cart) !== JSON.stringify(this.props.cart)) {
          const cartTotal = this.props.cart.reduce((sum, product: InCartProductObject) => {
             const productPrice = product.inCartProductData.prices.find((price: any) => {
                return price.currency.label === this.props.currentCurrency.label

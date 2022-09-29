@@ -1,10 +1,42 @@
 @import "../../variables";
 
+.product-wrapper {
+  position: relative;
+  width: $product-card-width + px;
+  height: $product-card-height + px;
+
+  .product-details-button {
+    width: 52px;
+    height: 52px;
+    position: absolute;
+    bottom: 72px;
+    right: 31px;
+    @include flex-all-center;
+    @include user-select-none;
+    border-radius: 50%;
+    background-color: #5ece7b;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 5;
+    animation-name: appearing;
+    animation-timing-function: linear;
+    animation-duration: 0.08s;
+    animation-fill-mode: forwards;
+
+    img {
+      width: 24px;
+      height: 24px;
+      display: inline;
+    }
+  }
+}
+
 .product-card-wrapper {
   width: $product-card-width + px;
   height: $product-card-height + px;
   @include flex-column-line-center-vertical-top;
   @include user-select-none;
+  position: relative;
   padding: 16px;
   padding-bottom: 0;
 
@@ -22,11 +54,9 @@
 
     .product-poster {
       display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
       width: auto;
       max-height: 338px;
+      position: absolute;
     }
 
     .out-of-stock-title {
@@ -53,31 +83,6 @@
     font-size: 18px;
     line-height: 160%;
     color: #1d1f22;
-  }
-
-  .product-details-button {
-    width: 52px;
-    height: 52px;
-    position: absolute;
-    top: -50px;
-    right: 26px;
-    @include flex-all-center;
-    @include user-select-none;
-    border-radius: 50%;
-    background-color: #5ece7b;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 5;
-    animation-name: appearing;
-    animation-timing-function: linear;
-    animation-duration: 0.1s;
-    animation-fill-mode: forwards;
-
-    img {
-      width: 24px;
-      height: 24px;
-      display: inline;
-    }
   }
 
   .product-price {

@@ -78,8 +78,22 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 120%;
-    background-color: #5ece7b;
     color: #ffffff;
+    transition-property: background-color;
+    transition-timing-function: linear;
+    transition-duration: 0.5s;
     cursor: pointer;
+
+    &:not(:hover) {
+      background-color: #5ece7b;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .order-button {
+    &:hover {
+      background-color: yellowgreen;
+    }
   }
 }

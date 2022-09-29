@@ -87,7 +87,7 @@ class CartItem extends Component<Props, State> {
                      <span>
                         {this.props.cartItemData.inCartProductData.prices.find((price: any) => {
                            return price.currency.label === this.props.currentCurrency.label
-                        })?.amount}
+                        })?.amount.toFixed(2)}
                      </span>
                   </p>
 
@@ -97,6 +97,7 @@ class CartItem extends Component<Props, State> {
                            return <AttributeItem
                               attributeData={attribute}
                               inCartProductSelectedAttributes={this.props.cartItemData.selectedAttributes}
+                              cartItemId={this.props.cartItemData.id}
                               inCartMode={true}
                               key={attribute.id} />
                         })}

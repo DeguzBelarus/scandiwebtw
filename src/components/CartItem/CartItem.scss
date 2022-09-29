@@ -89,6 +89,7 @@
               @include flex-all-center;
               border: 1px solid #1d1f22;
               background-color: #fff;
+              cursor: pointer;
 
               span {
                 font-family: "Source Sans Pro";
@@ -122,6 +123,7 @@
               @include flex-all-center;
               padding: 1px;
               border: 1px solid #fff;
+              cursor: pointer;
 
               .color-square {
                 width: 100%;

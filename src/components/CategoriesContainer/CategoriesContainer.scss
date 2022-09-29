@@ -22,6 +22,7 @@
     transition-duration: 0.7s;
     transition-timing-function: linear;
     cursor: pointer;
+    text-transform: uppercase;
 
     &.active {
       font-weight: 600;

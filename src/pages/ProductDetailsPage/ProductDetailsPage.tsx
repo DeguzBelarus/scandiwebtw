@@ -69,7 +69,16 @@ class ProductDetailsPage extends Component<Props, State> {
    }
 
    componentWillUnmount(): void {
-      this.props.setCurrentProduct([])
+      this.props.setCurrentProduct({
+         id: "",
+         name: "",
+         inStock: false,
+         gallery: [],
+         description: "",
+         attributes: [],
+         prices: [],
+         brand: ""
+      })
    }
 
    defaultPosterSourceHandler(source: string) {
@@ -134,6 +143,7 @@ class ProductDetailsPage extends Component<Props, State> {
                            attributeData={attribute}
                            inCartProductSelectedAttributes={[]}
                            inCartMode={false}
+                           cartItemId={Number(this.props.currentProduct.id)}
                            key={attribute.id} />
                      })}
 
@@ -146,7 +156,7 @@ class ProductDetailsPage extends Component<Props, State> {
                                  return price.currency.label === this.props.currentCurrency.label
                               })?.currency.symbol}${this.props.currentProduct.prices.find((price: PriceObject) => {
                                  return price.currency.label === this.props.currentCurrency.label
-                              })?.amount}`}
+                              })?.amount.toFixed(2)}`}
                            </span>
                         </p>
                      </div>}
@@ -159,22 +169,9 @@ class ProductDetailsPage extends Component<Props, State> {
                   </button>
 
                   {this.props.currentProduct.description &&
-                     <p className="description-paragraph">
-                        {this.props.currentProduct.description
-                           .split("<p>")
-                           .filter((word: string) => word !== "<p>")
-                           .join(" ")
-                           .split("</p>")
-                           .filter((word: string) => word !== "<h1>")
-                           .join(" ")
-                           .split("<h1>")
-                           .filter((word: string) => word !== "<p>")
-                           .join(" ")
-                           .split("</h1>")
-                           .filter((word: string) => word !== "<p>")
-                           .join(" ")
-                        }
-                     </p>}
+                     <div className="description-container"
+                        dangerouslySetInnerHTML={{ __html: this.props.currentProduct.description }}>
+                     </div>}
                </div>
             </div>
          </div>

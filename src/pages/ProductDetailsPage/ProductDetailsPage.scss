@@ -69,16 +69,19 @@
       }
     }
 
-    .description-paragraph {
-      width: 292px;
-      height: auto;
-      margin-top: 40px;
-      font-family: "Roboto";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 159.96%;
-      color: #1d1f22;
+    .description-container {
+      margin-top: 16px;
+
+      p {
+        width: 292px;
+        height: auto;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 159.96%;
+        color: #1d1f22;
+      }
     }
 
     .product-brand-paragraph {

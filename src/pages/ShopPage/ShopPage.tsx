@@ -13,6 +13,21 @@ type Props = {
 }
 
 class ShopPage extends Component<Props> {
+   componentDidMount(): void {
+      if (!window.location.pathname.includes("/product")) {
+         switch (true) {
+            case this.props.currentCategory === "all":
+               window.history.replaceState(null, "New Page Title", "/all")
+               break
+            case this.props.currentCategory === "clothes":
+               window.history.replaceState(null, "New Page Title", "/clothes")
+               break
+            case this.props.currentCategory === "tech":
+               window.history.replaceState(null, "New Page Title", "/tech")
+         }
+      }
+   }
+
    render() {
       return (
          <div className="shop-page-wrapper">

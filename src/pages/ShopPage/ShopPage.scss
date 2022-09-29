@@ -28,6 +28,7 @@
 
   .products-container {
     width: 100%;
+    max-width: 1238px;
     height: auto;
     @include flex-line-start-vertical-top;
     flex-wrap: wrap;
