@@ -3,6 +3,7 @@
 header {
   width: 100%;
   height: $header-height + px;
+  position: relative;
   padding-left: 101px;
   padding-right: 101px;
   @include flex-line-spacebetween-vertical-center;
@@ -13,6 +14,7 @@ header {
     @include flex-line-start-vertical-center;
     @include user-select-none;
     position: relative;
+    z-index: 7;
 
     .currency-switch-container {
       width: 100%;
@@ -43,6 +45,10 @@ header {
     .cart-icon-wrapper {
       position: relative;
       cursor: pointer;
+
+      &.active {
+        cursor: default;
+      }
 
       .products-count-indicator {
         width: 25px;

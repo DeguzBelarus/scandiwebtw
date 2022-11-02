@@ -1,57 +1,46 @@
+import { createRef, RefObject } from "react";
 import { Component } from 'react'
 import { connect } from "react-redux";
 import { RootState } from "../../app/store";
+import { Link } from "react-router-dom";
 
-import {
-  CurrencyObject,
-  InCartProductObject,
-  ProductObject,
-  setIsCartPageShown,
-  setIsCurrenciesShown
-} from "../../app/shopSlice";
-import { SelectedPropertyObject } from "../../components/AttributeItem/AttributePropertyItem/AttributePropertyItem";
-import CartItem from "../../components/CartItem/CartItem";
-import OrderButton from "../../components/OrderButton/OrderButton";
+import { CurrencyObject, InCartProductObject, setIsMiniCartShown } from "../../app/shopSlice";
+import { InCartProductObjectModified } from "../../pages/CartPage/CartPage";
+import CartItem from "../CartItem/CartItem";
+import { SelectedPropertyObject } from "../AttributeItem/AttributePropertyItem/AttributePropertyItem";
 import { ShopDataInLocalStorage } from "../../components/Header/Header";
-import "./CartPage.scss"
-
-export interface InCartProductObjectModified {
-  id: number,
-  inCartProductData: ProductObject,
-  selectedAttributes: SelectedPropertyObject[],
-  quantity: number,
-}
+import "./MiniCart.scss";
 
 type Props = {
   cart: InCartProductObject[],
   currentCurrency: CurrencyObject,
-  setIsCartPageShown: any,
-  setIsCurrenciesShown: any,
-  isCurrenciesShown: boolean,
+  setCart: any,
+  setIsMiniCartShown: any,
   currentCategory: string
 }
 
 type State = {
   cartDataModified: InCartProductObjectModified[],
   cartTotalAmount: number,
-  cartTaxAmount: number
 }
 
-class CartPage extends Component<Props, State> {
+class MiniCart extends Component<Props, State> {
+  private darkArea: RefObject<HTMLDivElement>
+
   constructor(props: any) {
     super(props)
+    this.darkArea = createRef()
 
     this.state = {
       cartDataModified: [],
       cartTotalAmount: 0,
-      cartTaxAmount: 0
     }
 
-    this.currenciesHide = this.currenciesHide.bind(this);
+    this.acceptOrder = this.acceptOrder.bind(this);
+    this.miniCartHide = this.miniCartHide.bind(this);
   }
 
   componentDidMount(): void {
-    this.props.setIsCartPageShown(true)
     const sortCartProductsMethod = (previous: any, next: any) => {
       switch (true) {
         case previous.id > next.id:
@@ -73,8 +62,7 @@ class CartPage extends Component<Props, State> {
 
       if (cartTotal) {
         this.setState({
-          cartTotalAmount: cartTotal,
-          cartTaxAmount: cartTotal * 0.21
+          cartTotalAmount: cartTotal
         })
       }
 
@@ -124,8 +112,7 @@ class CartPage extends Component<Props, State> {
 
       if (cartTotal) {
         this.setState({
-          cartTotalAmount: cartTotal,
-          cartTaxAmount: cartTotal * 0.21
+          cartTotalAmount: cartTotal
         })
       }
     }
@@ -140,8 +127,7 @@ class CartPage extends Component<Props, State> {
 
       if (cartTotal) {
         this.setState({
-          cartTotalAmount: cartTotal,
-          cartTaxAmount: cartTotal * 0.21
+          cartTotalAmount: cartTotal
         })
       }
 
@@ -201,55 +187,50 @@ class CartPage extends Component<Props, State> {
     }
   }
 
-  componentWillUnmount(): void {
-    this.props.setIsCartPageShown(false)
+  miniCartHide(event: any) {
+    if (event.target !== this.darkArea.current) return
+    this.props.setIsMiniCartShown(false)
+
   }
 
-  currenciesHide() {
-    if (!this.props.isCurrenciesShown) return
-    this.props.setIsCurrenciesShown(false)
+  acceptOrder() {
+    console.log(`Your order was confirmed. Thank you! Order details:`,
+      this.state.cartDataModified);
+    this.props.setCart([])
+    this.setState({
+      cartTotalAmount: 0
+    })
   }
   render() {
     return (
-      <div className="cart-page-wrapper" onClick={this.currenciesHide}>
-        <div className="category-name-container">
-          <span>CART</span>
-        </div>
-        <div className="cart-data">
-          {this.props.cart.length
-            ? this.state.cartDataModified.map((inCartProduct: InCartProductObjectModified, index) => {
+      <div className="mini-cart-grey-area" onClick={this.miniCartHide} ref={this.darkArea}>
+        <div className="mini-cart-wrapper">
+          <p className="product-count-paragraph">My Bag,<span>{` ${this.props.cart.length} item(s)`}</span>
+          </p>
+          {!!this.props.cart.length && <div className="mini-cart-data">
+            {this.state.cartDataModified.map((inCartProduct: InCartProductObjectModified, index) => {
               return <CartItem
                 cartItemData={inCartProduct}
-                inMiniCartMode={false}
+                inMiniCartMode={true}
                 index={index}
                 key={inCartProduct.id} />
-            })
-            : <p>Your cart is empty ;(</p>}
+            })}
+          </div>}
+          <div className="total-block">
+            <span>Total</span>
+            <span>{`${this.props.currentCurrency.symbol}${this.state.cartTotalAmount.toFixed(2)}`}</span>
+          </div>
+          <div className="buttons-block">
+            <Link to={"/cart"} className="view-bag-button">View bag</Link>
+            <button
+              type="button"
+              className="check-out-button"
+              onClick={this.acceptOrder}
+              disabled={!(!!this.props.cart.length)}>
+              CHECK OUT
+            </button>
+          </div>
         </div>
-
-        {this.props.cart.length > 0 &&
-          <>
-            <div className="total-information-container">
-              <span>Tax 21%:</span>
-              <strong>
-                {`${this.props.currentCurrency.symbol}${this.state.cartTaxAmount.toFixed(2)}`}
-              </strong>
-            </div>
-            <div className="total-information-container">
-              <span>Quantity:</span>
-              <strong>
-                {`${this.props.cart.length}`}
-              </strong>
-            </div>
-            <div className="total-information-container total">
-              <span>Total:</span>
-              <strong>
-                {`${this.props.currentCurrency.symbol}${this.state.cartTotalAmount.toFixed(2)}`}
-              </strong>
-            </div>
-
-            <OrderButton cartDataModified={this.state.cartDataModified} />
-          </>}
       </div>
     )
   }
@@ -259,14 +240,12 @@ function mapStateToProps(state: RootState) {
   return {
     cart: state.shop.cart,
     currentCurrency: state.shop.currentCurrency,
-    isCurrenciesShown: state.shop.isCurrenciesShown,
     currentCategory: state.shop.currentCategory
   }
 }
 
 const mapDispatchToProps = {
-  setIsCartPageShown,
-  setIsCurrenciesShown
+  setIsMiniCartShown,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCart)

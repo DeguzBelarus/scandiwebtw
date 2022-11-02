@@ -2,18 +2,19 @@
 
 .currencies-container {
   width: $currencies-container-width + px;
-  height: 0;
+  height: $currencies-container-height + px;
   position: absolute;
   top: $header-height - 5 + px;
   left: -30px;
   @include flex-column-line-center-vertical-top;
   @include user-select-none;
   background-color: #fff;
-  animation-name: manifestation;
-  animation-fill-mode: forwards;
-  animation-duration: 0.15s;
-  animation-timing-function: linear;
   overflow: hidden;
+  opacity: 0;
+  animation-name: appearing;
+  animation-fill-mode: forwards;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
   z-index: 1;
 
   .currency-selection-container {
@@ -37,12 +38,6 @@
   }
 }
 
-@keyframes manifestation {
-  100% {
-    height: $currencies-container-height + px;
-  }
-}
-
 @media (hover: hover) {
   .currencies-container {
     .currency-selection-container {
@@ -50,5 +45,11 @@
         background-color: #eee;
       }
     }
+  }
+}
+
+@keyframes appearing {
+  100% {
+    opacity: 1;
   }
 }

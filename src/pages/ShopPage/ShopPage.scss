@@ -1,12 +1,45 @@
 @import "../../variables";
 
+.loading-wrapper {
+  width: 100%;
+  height: calc(100vh - #{($header-height + px)});
+  @include flex-all-center;
+  @include user-select-none;
+
+  h2 {
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    color: yellowgreen;
+    animation-name: flashing;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 0.3s;
+  }
+}
+
+@keyframes flashing {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .shop-page-wrapper {
   width: 100%;
   height: calc(100vh - #{($header-height + px)});
   @include flex-column-line-start-vertical-top;
   @include user-select-none;
-  padding-left: 101px;
-  padding-right: 116px;
+  padding-left: 100px;
+  padding-right: 102px;
   overflow-y: scroll;
   overflow-x: hidden;
 
@@ -35,5 +68,11 @@
     gap: 40px;
     margin-left: 15px;
     margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px) {
+  .products-container {
+    gap: 2px !important;
   }
 }

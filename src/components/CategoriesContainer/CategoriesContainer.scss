@@ -21,8 +21,8 @@
     transition-property: border-color, color;
     transition-duration: 0.7s;
     transition-timing-function: linear;
-    cursor: pointer;
     text-transform: uppercase;
+    cursor: pointer;
 
     &.active {
       font-weight: 600;

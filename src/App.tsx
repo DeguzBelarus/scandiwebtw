@@ -4,12 +4,12 @@ import { AppRouter } from "./AppRouter/AppRouter";
 import Header from "./components/Header/Header";
 
 class App extends Component {
-   render() {
-      return <>
-         <Header />
-         <AppRouter />
-      </>
-   }
+  render() {
+    return <>
+      <Header />
+      <AppRouter />
+    </>
+  }
 }
 
 export default App;
