@@ -4,4 +4,4 @@ Endpoint for this client: [here](https://github.com/scandiweb/junior-react-endpo
 
 ## run with yarn: yarn start
 
-Video demo: [here](https://drive.google.com/file/d/1RBFswiJYaARQk2nvE4M21HAXBygDR4Fo/view?usp=sharing).
+Video demo: [here](https://drive.google.com/file/d/1GC6fPT2TGkWZEIC6cB4WYi21FJAPm3TV/view?usp=share_link).
