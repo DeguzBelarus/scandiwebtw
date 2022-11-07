@@ -10,6 +10,7 @@
   transition-property: transform, box-shadow;
   transition-timing-function: linear;
   transition-duration: 0.5s;
+  background-color: #fff;
 
   .add-to-cart-default-button {
     width: 52px;
@@ -123,6 +124,7 @@
     &:hover {
       transform: translateX(-10px) translateY(-10px) scale(1.1);
       box-shadow: 5px 5px 10px 0 grey;
+      z-index: 1;
     }
   }
 
@@ -136,10 +138,11 @@
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .product-wrapper {
     max-width: $product-card-width + px;
-    height: $product-card-height * 0.66 + px;
+    height: $product-card-height * 0.7 + px;
     @include flex-column-line-start-vertical-top;
     flex-basis: 33%;
     position: relative;
+    padding-bottom: 15px;
 
     .add-to-cart-default-button {
       width: 52 * 0.66 + px;
@@ -161,7 +164,7 @@
 
   .product-card-wrapper {
     width: 100%;
-    height: $product-card-height * 0.66 + px;
+    height: $product-card-height * 0.7 + px;
     @include flex-column-line-center-vertical-top;
     @include user-select-none;
 
